@@ -1,6 +1,8 @@
 # Staking BOSS
 BOSS is universal staking NFT that enables decentralized staking and rewards allocation
 
+- Video: https://youtu.be/dGYxSxTW5b4
+
 ## Stack:
 - Wordpress
 - Javascript embedded in WP pages for web3
