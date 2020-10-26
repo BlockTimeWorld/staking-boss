@@ -1,0 +1,49 @@
+<script type="text/javascript" src="./web3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
+
+<script type="text/javascript">
+
+window.addEventListener('load', function () {
+	if (typeof web3 !== 'undefined') {
+		console.log('Web3 Detected! ' + web3.currentProvider.constructor.name)
+		window.web3 = new Web3(web3.currentProvider);
+	} else {
+		console.log('No Web3 Detected... using HTTP Provider')
+		window.web3 = new Web3(new Web3.providers.HttpProvider("https://rpc-mumbai.matic.today/"));
+	}
+}
+</script>
+
+<script>
+var inputfield = "active_wallet";
+var user = web3.eth.accounts[0];
+
+
+window.onload = function () {
+    if (localStorage.getItem("hasCodeRunBefore") === null) {
+        setvalue(inputfield);
+        localStorage.setItem("hasCodeRunBefore", true);
+    }
+}
+
+// call the setvalue function when page loads
+window.onload = function () {
+setvalue(inputfield);
+}
+
+// retrieve the current user
+function setvalue(field) {
+  // get the current user
+  user = web3.eth.accounts[0];
+  // assign to a field
+  document.getElementById(field).value = user;
+  
+}
+  
+// call the setvalue function when account changes
+window.ethereum.on('accountsChanged', function (accounts) {
+  // reload your interface with accounts[0]!
+  user = web3.eth.accounts[0];
+  setvalue(inputfield);
+})
+</script>

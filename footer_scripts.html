@@ -1,0 +1,146 @@
+<script>
+
+// the staking page script, common to all pages
+ 
+window.onload = function () {
+  document.getElementById("active_wallet").value = user;
+  getAllowance();
+  getERC20balance();
+  getAllStaked();
+  getAllHoldings();
+  getBossbalance();
+  calctotals();
+}
+
+window.ethereum.on('accountsChanged', function (accounts) {
+  // location.reload(true);
+  document.getElementById("active_wallet").value = user;
+  getAllowance();
+  getERC20balance();
+  getAllStaked();
+  getAllHoldings();
+  getBossbalance();
+  calctotals();
+  });
+
+// erc20 BALANCE
+// instantiate and connect to contract address via Abi
+
+var myERC20Abi = web3.eth.contract(erc20abi);
+var myERC20function = myERC20Abi.at(contractERC20address);
+
+//function to user's allownace token balance
+function getAllowance() {
+    try {
+      var spender = boss721address; // boss contract coming fron the head
+      myERC20function.allowance(user, spender, function (err, xname) {
+      if (err) { console.log(err) }
+          if (xname) {
+            if (xname == 0) {
+                // alert("Please approve first!");
+                document.getElementById("lock").src = "http://159.89.120.103/staking/wp-content/uploads/2020/05/lock_closed_80.png";
+                document.getElementById("approve").style.visibility = "visible";
+                document.getElementById("withdraw").style.visibility = "hidden";
+                document.getElementById("deposit").style.visibility = "hidden";
+              } else {
+                // alert("Allowed all right - go ahead!");
+                document.getElementById("lock").src = "http://159.89.120.103/staking/wp-content/uploads/2020/05/lock_open_80.png";
+                document.getElementById("approve").style.visibility = "hidden";
+                document.getElementById("withdraw").style.visibility = "visible";
+                document.getElementById("deposit").style.visibility = "visible";
+              }	
+          }
+      });
+      }
+    catch (err) {document.getElementById("wallet_balance").innerHTML = err;}}
+  
+//function to user's erc20 token balance
+function getERC20balance() {
+    try {
+      myERC20function.balanceOf(user, function (err, xname) {
+      if (err) { console.log(err) }
+          if (xname) {
+              xname = xname / contract_multiplier; // X decimals
+              document.getElementById("wallet_balance").value = xname.toFixed(4);
+          }
+      });
+      }
+    catch (err) {document.getElementById("wallet_balance").innerHTML = err;}}
+
+// erc721 BALANCE
+//instantiate and connect to contract address via Abi
+var myBossAbi = web3.eth.contract(boss721abi);
+var myBossfunction = myBossAbi.at(boss721address);
+
+//function to user's erc20 token balance
+function getBossbalance() {
+    try {
+      myBossfunction.balanceOfUserERC20(contractERC20address, user, function (err, xname) {
+      if (err) { console.log(err) }
+          if (xname) {
+              xname = xname / contract_multiplier; // x decimals
+              document.getElementById("staked_balance").value = xname.toFixed(4);
+              calctotals(); // seems to be the best do it here
+          }
+      });
+      }
+    catch (err) {document.getElementById("staked_balance").innerHTML = err;}}
+
+//function to all staked DUST erc20 token balance
+function getAllStaked() {
+    try {
+      myBossfunction.calcTotalERC20Deposits(contractERC20address, function (err, xname) {
+      if (err) { console.log(err) }
+          if (xname) {
+              xname = xname / contract_multiplier;
+              document.getElementById("staked_supply").value = xname.toFixed(2);
+          }
+      });
+      }
+    catch (err) {document.getElementById("staked_supply").innerHTML = err;}}
+
+//function to all staked DUST erc20 token balance
+function getAllHoldings() {
+    try {
+      myBossfunction.calcAllERC20Holdings(contractERC20address, function (err, xname) {
+      if (err) { console.log(err) }
+          if (xname) {
+              xname = xname / contract_multiplier;
+              document.getElementById("total_holdings").value = xname.toFixed(2);
+          }
+      });
+      }
+    catch (err) {document.getElementById("total_holdings").innerHTML = err;}
+
+	}
+
+  
+function calctotals() {
+  
+  // HOLDINGS %
+  var walletbalance = parseFloat(document.getElementById("wallet_balance").value);
+  var stakedbalance = parseFloat(document.getElementById("staked_balance").value);
+  var totalbalance = walletbalance + stakedbalance
+
+  document.getElementById("your_holdings").value = totalbalance.toFixed(2);
+  document.getElementById("your_stakings").value = stakedbalance.toFixed(2);
+
+  if (stakedbalance == 0) {
+	document.getElementById("staking_percentage").value = "0 %";
+	} else {
+      var stakedsupply = parseFloat(document.getElementById("staked_supply").value);
+      var staked_percent = (stakedbalance / stakedsupply) * 100
+      var staked_percent = staked_percent.toFixed(2) + " %"
+      document.getElementById("staking_percentage").value = staked_percent;	
+    }
+  
+  if (totalbalance == 0) {
+	document.getElementById("your_percentage").value = "0 %";
+	} else {
+      var holdings = parseFloat(document.getElementById("total_holdings").value);
+      var holdings_percent = (totalbalance / holdings) * 100
+      var holdings_percent = holdings_percent.toFixed(2) + " %"
+      document.getElementById("your_percentage").value = holdings_percent;
+    }
+}
+</script>
