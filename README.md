@@ -22,7 +22,7 @@ BOSS is universal staking NFT that enables decentralized staking and rewards all
 - MERC: https://mumbai-explorer.matic.today/address/0x3429e89F3bE1e840aE719c9dF59e586E52003eF8/transactions
 - RAIN: https://mumbai-explorer.matic.today/address/0x5aEc90591F32F1098c8eCe7f21C718C3732019b5/transactions
 
-### Get Test tokens using some Mumbai Matic in SwapMatic:
+### Get Test tokens using some Mumbai MATIC in SwapMatic:
 - https://dev.swapmatic.io/swap?outputCurrency=0x1aBc1ffe8dA9Fe34F76E3b7454F446590508b656
 - https://dev.swapmatic.io/swap?outputCurrency=0x3429e89F3bE1e840aE719c9dF59e586E52003eF8
 - https://dev.swapmatic.io/swap?outputCurrency=0x5aEc90591F32F1098c8eCe7f21C718C3732019b5
