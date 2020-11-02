@@ -1,7 +1,6 @@
 # Staking BOSS
 BOSS is universal staking NFT that enables decentralized staking and rewards allocation
 
-- Hackmd: https://hackmd.io/r5kZ4YgjQp2XCXKcPt3byg
 - Video: https://youtu.be/dGYxSxTW5b4
 - Presentation: https://github.com/BlockTimeWorld/staking-boss/blob/main/Staking%20BOSS.pdf
  
