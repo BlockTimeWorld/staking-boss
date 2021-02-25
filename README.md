@@ -11,7 +11,7 @@ BOSS is universal staking NFT that enables decentralized staking and rewards all
 - OneClick dApp by Remix plugin
 - Mumbai Test Network
 
-## WordPress Reqiuirements
+## WordPress Requirements
 - https://en-ca.wordpress.org/plugins/insert-headers-and-footers/
 - https://wordpress.org/plugins/shortcoder/
 
