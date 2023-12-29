@@ -1,0 +1,24 @@
+{
+  "description": "BOSS is universal staking NFT that enables decentralized staking and rewards allocation.\n\n\nThe Staking BOSS NFT works with unlimited number of ERC20 and ERC721 tokens and various configuration of these.\n\n\nGet your BOSS NFT and start enjoying pasive income like a BOSS",
+  "external_url": "https://blocktimeworld.com/staking-in-blocktimeworld/",
+  "image": "https://raw.githubusercontent.com/BlockTimeWorld/staking-boss/main/images/17.png",
+  "name": "Staking BOSS #17",
+  "attributes": [
+    {
+      "trait_type": "contract_address",
+      "value": "0x041771CBdd2538807d4b09Ca3712008265932aB0"
+    },
+    {
+      "trait_type": "contact",
+      "value": "boss@blocktimeworld.com"
+    },
+    {
+      "trait_type": "max_supply",
+      "value": "10000"
+    },
+    {
+      "trait_type": "mint_date",
+      "value": "Dec-29-2023"
+    }
+  ]
+}
